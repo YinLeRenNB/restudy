@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="div1">
+        <a href="">这是链接</a>
+        <h1>这是标题</h1>
+        <p>这是p标签</p>
+        <div id="div3">
+            <p>这是div3下的p</p>
+        </div>
+    </div>
+   
+    <div id="div2" class="aa bb">这是div2</div>
+
+
+
+
+    <script>
+        var oDiv1 = document.querySelector('#div1');
+        //找到div1下的所有孩子 -> 仅仅为第一代孩子
+        console.log(oDiv1.children);
+
+        var oDiv2 = document.querySelector('#div2');
+        oDiv2.onclick = function(){
+            oDiv2.style.background = 'red';//属于内联 -> 优先级最高
+            oDiv2.classList.add('cc');
+            oDiv2.classList.remove('bb');
+        }
+
+
+    </script>
+
+</body>
+</html>

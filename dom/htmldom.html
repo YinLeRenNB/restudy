@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #tbl1, #tbl1 td{
+            border: 1px solid black;
+        }
+        #tbl1{
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <button id="btn">添加一行</button>
+    <table id="tbl1">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>user</td>
+                <td>psw</td>
+            </tr>
+        </thead>
+        <tbody id="tbody1">
+            <tr>
+                <td>text 1</td>
+                <td>text 2</td>
+                <td>text 3</td>
+            </tr>
+            <tr>
+                <td>text 1</td>
+                <td>text 2</td>
+                <td>text 3</td>
+            </tr>
+        <!-- 在这里动态添加 -->
+        </tbody>
+    
+        
+    </table>
+
+
+    <script>
+        var oBtn = document.getElementById('btn');
+        var oTbl1 = document.getElementById('tbl1');
+        var oTbody1 = document.getElementById('tbody1');
+
+        oBtn.onclick = function(){
+
+            var oTr = oTbody1.insertRow();
+            oTr.insertCell().innerText = "add1";
+            oTr.insertCell().innerText = "add2";
+            oTr.insertCell().innerText = "add3";
+           
+
+        }
+
+    </script>
+</body>
+</html>
