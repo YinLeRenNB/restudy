@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn">按钮</button>
+    <div id="div1"> div1</div>
+
+    <ul id="ul1">
+        <li>item 1</li>
+        <li class="aa bb">item 2</li>
+        <li class="aa">item 3</li>
+    </ul>
+    
+
+    <script>
+
+        var btn = document.getElementById('btn'); 
+        btn.onclick = function(){
+            console.log('hi');
+        };
+
+        var div1 = document.getElementById('div1');
+        div1.onclick = function(){
+            div1.style.width = '200px';
+            div1.style.height = '200px';
+            div1.style.background = 'red';
+        };
+        //DOM查找  
+    
+        //1.document.getElementById("idname"); 获取不存在的元素——null
+        
+        //2.documents.getElementByTagName("li"); 全选
+        var aLi = document.getElementsByTagName('li');
+        console.log(aLi);
+        
+        //3.document.getElementsByClassName("aa"); 选择一部分 —> 出现兼容问题
+        var aLi1 = document.getElementsByClassName("aa");
+        console.log(aLi1);
+
+        //解决兼容问题 -> 自行封装一个className函数
+        // @param className 要搜索的类名
+        // @param tagName 限定搜索的标签名
+        // @param context 限定搜索的类名
+        function getByClass(className, tagName, context){
+            //若用户没有传第三个值，则将context = document (防止用户未传第三个参数报错)
+            context = context || document;
+
+            var res = [];//定义空数组，用来存放找到的class的元素
+            if(context.getElementsByClassName){
+                return context.getElementsByClassName(className);
+            }else{
+                var arr = context.getElementsByTagName(tagName);
+                    for(var i=0; i<arr.length; i++){
+                        //过滤出带有class属性的值
+                        if(arr[i].className.indexOf(className) != -1){ 
+                            //indexOf 出现的问题 “aabb”也被找到 理想解决方法需要用正则表达式
+                            //arr[i].className == className 当使用多类选择器的时候出现bug
+                            //arr[i].class 因为class是自带的类，所以用className代替，实质上等同与class
+                            res.push(arr[i]);
+                        }//for.结束
+                    }
+                }
+                return res;
+            };//getByClass
+
+        var oUl1 = document.getElementsById('ul1');//context限定范围
+        var aLi2 = getByClass('aa', 'li', oUl1); //调用封装的函数
+        for(var i=0; i<aLi2.length; i++){
+            aLi2[i].style.background = 'green';
+        };
+        //封装完成
+   
+   </script>
+</body>
+</html>
