@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="div1">
+        <h1>这是一个标题</h1>
+    </div>
+
+    <div id="div2"><!-- 这是注释 --></div>
+
+    <script>    
+        //节点Node
+        var oDiv1 = document.getElementById('div1');
+        var oDiv2 = document.getElementById('div2');
+        //元素节点：nodeTyoe = 1
+        console.log(oDiv1.nodeType);
+        //文本节点：nodeTyoe = 3
+        console.log(oDiv1.firstChild.nodeType);
+        //属性节点：nodeTyoe = 2
+        console.log(oDiv1.getAttributeNode("id").nodeType);
+        //注释节点：nodeTyoe = 8
+        console.log(oDiv2.firstChild.nodeType);
+
+               
+        /**
+         * children:找到当前元素的所有第一代元素节点；childNode：找到当前元素的所有第一代节点
+        标准浏览器 firstChild 包括文本节点，IE8之前不包括即找到第一个元素节点 => 兼容问题
+        nextSibling 类似
+        详情看dom遍历部分
+        */
+       
+        //oDiv1.firstChild.style.background = 'red';
+ 
+
+    </script>
+</body>
+</html>

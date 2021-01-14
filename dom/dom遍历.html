@@ -17,8 +17,9 @@
 </head>
 <body>
     <div id="div1">
+        <!-- 注释 -->
         <a href="">这是链接</a>
-        <h1>这是标题</h1>
+        <h1 id="title">这是标题</h1>
         <p>这是p标签</p>
         <div id="div3">
             <p>这是div3下的p</p>
@@ -38,9 +39,41 @@
         var oDiv2 = document.querySelector('#div2');
         oDiv2.onclick = function(){
             oDiv2.style.background = 'red';//属于内联 -> 优先级最高
-            oDiv2.classList.add('cc');
-            oDiv2.classList.remove('bb');
+            oDiv2.classList.add('cc');//加类
+            oDiv2.classList.remove('bb');//减类
         }
+
+        //有兼容问题
+        var oH1 = document.querySelector('#title');
+        // console.log(oH1.nextSibling.style.background = 'red');
+        // console.log(oH1.nextElementSibling);  IE8之前不支持
+
+        //解决兼容问题
+        /**
+         * 
+        */
+        function next(elem){
+            //循环调用elem.nextSibling 找下一个兄弟元素
+            do{
+                elem = elem.nextSibling;
+            }while(elem && elem.nodeType != 1);
+            return elem;
+        }
+
+        function first(elem){
+            elem = elem.firstChild;//第一次找孩子，之后找兄弟
+            return elem && elem.nodeType == 1  ? elme : next(elem);
+        }
+
+        var oA = first(oDiv1);//找到第一个元素孩子
+        oA.style.background = "pink";
+
+        var oP = next(oH1);//找到下一个元素孩子
+        if(oP){
+            oP.style.background = 'pink';
+        }
+       
+
 
 
     </script>
