@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }  
+        #container{
+            margin: 50px auto; 
+            position: relative;
+            width: 750px;
+        }
+        #img-box>img{
+            display: none;
+        }
+        #img-box>img.active{
+            display: block;
+        }
+        #tabs{
+            display: flex;
+            position: absolute;
+            right: 40px;
+            bottom: 25px;
+            width: 140px;
+            justify-content: space-between;
+        }
+        #tabs>li{
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+        #container .btn{
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 50px;
+            text-align: center;
+            line-height: 80px;
+            top: 50%;
+            margin-top: -40px;
+        }
+        #tabs>li.active{
+            background-color: rgba(255, 0, 0, 0.9);
+        }
+        #prev{
+            left: 0;
+        }
+        #next{
+            right: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="img-box">
+            <img src="imgs\1.jpg" alt="" class="active">
+            <img src="imgs\2.jpg" alt="">
+            <img src="imgs\3.jpg" alt="">
+            <img src="imgs\4.jpg" alt="">
+            <img src="imgs\5.jpg" alt="">
+        </div>
+
+        <ul id="tabs">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+
+        <div id="prev" class="btn">&lt;</div>
+        <div id="next" class="btn">&gt;</div>
+        
+
+    </div>
+
+    <script>
+        var aLi = document.querySelectorAll('#tabs>li');
+        var aImg = document.querySelectorAll('#img-box>img');
+        var oPrev = document.getElementById('prev');
+        var oNext = document.getElementById('next');
+        var oContainer = document.getElementById('container');
+
+        var curIndex = 0;//当前显示图片的索引
+
+        function change(){
+            //清空样式
+            for(var j=0; j<aLi.length; j++){
+                    aLi[j].className = '';
+                    aImg[j].className = '';
+                }
+            //为当前索引添加class
+            aLi[curIndex].className = 'active';
+            aImg[curIndex].className = 'active';
+        }
+
+
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].index = i;
+            aLi[i].onclick = function(){
+                curIndex = this.index;//改变后当前的索引值
+                change();   
+            }
+        }
+
+        oNext.onclick = function(){
+            curIndex += 1;
+            if(curIndex == 5){
+                curIndex = 0;
+            }
+            change();
+        }
+
+        oPrev.onclick = function(){
+            curIndex -= 1;
+            if(curIndex == -1){
+                curIndex = 4;
+            }
+            change();
+        }
+
+        //自动翻页
+        var autochange;//使得每次的定时器都为同一个定时器，防止划入划出时每次都定义一个新的定时器
+        function go(){
+            autochange = setInterval(function(){
+                oNext.onclick();
+            }, 1000);
+        }
+        
+        oContainer.onmouseout = function(){
+           go();
+        }
+
+        oContainer.onmouseover = function(){
+            //停止翻页 -> 清楚定时器
+            clearInterval(autochange);
+        }
+    </script>
+</body>
+</html>
