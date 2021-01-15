@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+
+    <style>
+        *{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            width: 300px;
+            margin: 50px auto; 
+            border: 1px solid gray;
+            /* 块元素水平居中 */
+            background: pink;
+        }
+        #tabs{
+            height: 40px;
+            border-bottom: 1px solid gray;
+        }
+        #tabs li{
+            float: left;
+            /* 浮动元素空间释放 -> 父元素塌陷 无高度 */
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+        #tabs li.active{
+            background-color: gold;
+            color: cadetblue;
+        }
+        #content{
+            height: 400px;
+        }
+        #content>div{
+            display: none;
+            height: 400px;
+        }
+        #content>div.active{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <ul id="tabs">
+                <li class="active">菜单1</li>
+                <li>菜单2</li>
+                <li>菜单3</li>
+        </ul>
+
+        <div id="content">
+            <div class="active">11111111</div>
+            <div>22222222</div>
+            <div>33333333</div>
+        </div>
+
+    </div>
+    
+
+    <script>
+        var oTabs = document.getElementById('tabs');
+        var aLi = oTabs.getElementsByTagName('li');
+        var oContent = document.getElementById('content');
+        var aDiv = oContent.getElementsByTagName('div');
+
+        for(var i=0; i<aLi.length; i++){       
+            // 为了content中能取到当前的i值 -> 自定义index属性
+            // 对象.属性 = x;  为对象加属性
+            aLi[i].index = i;
+
+            aLi[i].onclick = function(){
+                // 清空所有的active
+                for(var j=0; j<aLi.length; j++){
+                    aLi[j].className = '';
+                    aDiv[j].className = '';
+                }
+                // 当前点击增加active
+                this.className = 'active';
+                aDiv[this.index].className = 'active';
+            }
+
+
+        }
+    </script>
+</body>
+</html>
