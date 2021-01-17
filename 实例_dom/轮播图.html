@@ -94,6 +94,7 @@
 
         var curIndex = 0;//当前显示图片的索引
 
+        //图片与数字对应通用部分代码
         function change(){
             //清空样式
             for(var j=0; j<aLi.length; j++){
@@ -105,7 +106,7 @@
             aImg[curIndex].className = 'active';
         }
 
-
+        //图片与数字对应
         for(var i=0; i<aLi.length; i++){
             aLi[i].index = i;
             aLi[i].onclick = function(){
@@ -114,6 +115,7 @@
             }
         }
 
+        //点击>翻页
         oNext.onclick = function(){
             curIndex += 1;
             if(curIndex == 5){
@@ -122,6 +124,7 @@
             change();
         }
 
+        //点击<翻页
         oPrev.onclick = function(){
             curIndex -= 1;
             if(curIndex == -1){
@@ -139,11 +142,11 @@
         }
         
         oContainer.onmouseout = function(){
-           go();
+           go(); //每次所设定的都是go()函数中的同一个定时器
         }
 
         oContainer.onmouseover = function(){
-            //停止翻页 -> 清楚定时器
+            //停止翻页 -> 清除定时器
             clearInterval(autochange);
         }
     </script>

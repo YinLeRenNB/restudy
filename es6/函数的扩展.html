@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        this指向问题：
+            1.事件处理函数中 this -> 绑定事件的dom元素
+            2.自定义函数中 this -> window
+            3.定时器中 this -> window
+            4.自定义的对象中 this -> 自定义的对象
+            5.在类中 this -> 调用他的对象
+    -->
+    <button id="btn">点我</button>
+    <ul>
+        <li id="1">111</li>
+        <li id="2">222</li>
+        <li id="3">333</li>
+    </ul>
+    <script>
+        let oBtn = document.getElementById('btn');
+        let aLi = document.getElementsByTagName('li');
+
+
+        oBtn.onclick = function () {
+            alert('爱你');
+        }
+        // 参数设置默认值 -> ...rest
+        function fn1() {
+
+        }
+        fn1();
+        console.log(fn1.name); // 返回为fn1
+        console.log(fn1.length); // 返回为0 -> function fn() 括号中形参的个数(有默认值的不算)
+
+        // 箭头函数
+        let fn2 = function () { };
+        let fn3 = () => {
+
+        }
+        /*
+            改变 this 指向的方法：
+                1.call：参数为多个(要改变的指针,后面所有参数都是这个方法的实参)
+                2.apply：参数为两个(要改变的指针,[实参1,实参2,...])
+                3.bind：参数为多个(要改变的指针,后面所有参数都是这个方法的实参) 需要手动调用
+        */
+
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].onclick = function () {
+                setTimeout(function () {
+                    console.log(this); // window -> li
+                }.bind(this), 2000);   // 使用call存在延迟函数失效
+            }
+        }
+
+        /*
+            箭头函数中的this问题(两种解释方法)：
+                1.箭头函数中的this -> 定义时所在的对象
+                2.箭头函数中的this -> 父作用域中的this
+        */
+        //上述问题直接将function 改为 () => {} this直接指向li
+
+        let obj = {
+            name: 'obj',
+            study: function () {
+                console.log(this); //obj
+                let obj1 = {
+                    name: 'obj1',
+                    code:  () => {
+                        console.log(this); //obj
+                    }
+                }
+                obj1.code();
+            }
+        }
+        obj.study();
+
+    </script>
+</body>
+
+</html>
