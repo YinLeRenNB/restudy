@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let m1 = new Map();
+        
+        // 添加成员
+        m1.set('name','lisi');
+        m1.set('age','25')
+        console.log(m1);
+
+        // get()
+        console.log(m1.get('name'));
+        // has 返回为boolean
+
+        for(let [index,value] of m1.entries()){
+            console.log(index,value);
+        }
+
+        //WeakMap
+        let wm = new WeakMap();
+        wm.set({name:'zhaosi'},"wangsu");//set(对象，值)
+        console.log(wm);
+    </script>
+</body>
+</html>
