@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set</title>
+</head>
+
+<body>
+
+
+    <script>
+        let arr = [1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 5, 5, 6];
+        let s1 = new Set(arr);// set 为类数组，不允许成员重复
+        console.log(s1);
+        let a2 = [...s1];
+
+        let a3 = [... new Set(arr)];
+
+        // add() => 返回更改后的 Set
+        // size => length
+        // delete => 删除
+        console.log(s1.delete(6));
+        console.log(s1);
+        // 是否有某成员 has
+
+        //for of 循环  ->  index和value值相同
+        for (let [index, value] of s1.entries()) {
+            console.log(index, value);
+        }
+
+        // WeakSet 与 Set 类似，但只能添加对象
+        let ws1 = new WeakSet();
+        let obj = {
+            name: 'lisi',
+            age: 33,
+        }
+        ws1.add(obj);
+        console.log(ws1);
+
+    </script>
+</body>
+
+</html>
