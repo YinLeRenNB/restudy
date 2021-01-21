@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="change">click me to change the tag</button>
+        <p v-if="tag">tag is true</p>
+        <p v-else>tag is false</p>
+        <p v-show="tag">use v-show to contral</p>
+
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                tag:true,
+            },
+            methods:{
+                change(){
+                    this.tag = !this.tag;
+                },
+            },
+        })
+    </script>
+</body>
+</html>
