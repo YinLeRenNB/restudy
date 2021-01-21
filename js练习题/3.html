@@ -10,7 +10,21 @@
         （儿童：年龄＜14；青少年：14<=年龄＜24；青年：24<年龄＜40; 中年：40＜=年龄＜60; 老年：年龄>=60）
         ，并在页面上输出判断结果。 -->
         <script>
-            
+            var age;
+            age=prompt('请输入你的年龄',);
+            if(age<14){
+                document.write('你是儿童');
+            }else if(age>=14 && age<24){
+                document.write('你是青少年');
+            }else if(age>=24 && age<40){
+                document.write('你是中年');
+            }else if(age>=40 && age<60){
+                document.write('');
+            }else if(age>=60 && age<100){
+                document.write('你是老年');
+            }else if(age>=100){
+                document.write('你入土了');
+            }
         </script>
 </body>
 </html>
