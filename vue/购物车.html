@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #app {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        li {
+            height: 40px;
+            line-height: 40px;
+            background: darkgray;
+            margin: 10px 0;
+            padding: 0 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        ul{
+            border-bottom: 1px solid #000;
+        }
+        .active{
+            background: darkseagreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>商品列表</h1>
+        <ul>
+            <li v-for="(item,index) in list" :key="index" :class="{active:item.isActive}"
+            @click="change(item)">
+                <span>{{item.name}}</span>
+                <span>{{item.price}}</span>
+            </li>
+        </ul>
+        <h3>方法调用中的总价：{{sum}}</h3>
+        <h3>计算属性中的总价：{{total}}</h3>
+
+    </div>
+
+    <!-- 
+        计算属性：只有在计算所需的相关依赖发生变化时才会调用
+        方法调用：每次触发页面重新渲染都会调用
+    -->
+    <script src="./vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    {
+                        name: '衬衫',
+                        price: 999,
+                        isActive: false,
+                    },
+                    {
+                        name: '电脑',
+                        price: 13800,
+                        isActive: false,
+                    },
+                    {
+                        name: '裙子',
+                        price: 1999,
+                        isActive: false,
+                    },
+                    {
+                        name: '裤子',
+                        price: 888,
+                        isActive: false,
+                    },
+                ],
+                sum:0,
+            },
+            methods: {
+                change(obj){
+                    obj.isActive = !obj.isActive;
+                    obj.isActive == true? this.sum += obj.price : this.sum -= obj.price;
+                }
+                
+            },
+            computed:{
+                total(){
+                    let count = 0;
+                    this.list.forEach(obj => {
+                        if(obj.isActive == true){
+                            count += obj.price;
+                        }
+                    });
+                    return count;
+                }
+            },
+            // 监听属性的变化
+            watch:{
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>

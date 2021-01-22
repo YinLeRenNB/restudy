@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        {{msg}}
+        <button @click="change">更新</button>
+        <button @click="del">摧毁</button>
+    </div>
+
+
+
+    <script src="./vue.js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world'
+            },
+            methods: {
+                change() {
+                    this.msg += ' new';
+                },
+                del() {
+                    vm.$destroy();
+                }
+            },
+            // 实例还未创建
+            beforeCreate() {
+                console.log('-----------beforeCreate------------');
+                console.log('el', this.$el); //undefined
+                console.log('data', this.$data); //undefined
+                console.log('innerHTML', document.getElementById('app').innerHTML);// {{msg}}
+            },
+
+            // 实例创建成功，data中数据显示出来
+            created() {
+                console.log('-----------created------------');
+                console.log('el', this.$el); //undefined
+                console.log('data', this.$data); //对应
+                console.log('innerHTML', document.getElementById('app').innerHTML);// {{msg}}
+            },
+
+            // 数据中的data模版先占位
+            beforeMount() {
+                console.log('-----------beforeMount------------');
+                console.log('el', this.$el); // <div id="app"> {{msg}} </div>
+                console.log('data', this.$data); // 对应
+                console.log('innerHTML', document.getElementById('app').innerHTML);// {{msg}}
+            },
+
+            // 模板中的data数据显示出来 -> 初次渲染完成
+            mounted() {
+                console.log('-----------mounted------------');
+                console.log('el', this.$el); // <div id="app"> hello world </div>
+                console.log('data', this.$data); // 对应
+                console.log('innerHTML', document.getElementById('app').innerHTML);// hello world
+            },
+
+            // 当 data 中的数据发生变化时调用，虚拟 dom 改变了，真实 dom 没变
+            beforeUpdate() {
+                console.log('--------------beforeUpdate-------------');
+                console.log('el', this.$el); //<div id="app">hello world new</div>
+                console.log('data', this.$data); // hello world new
+                console.log('innerHTML', document.getElementById('app').innerHTML); // hello world
+            },
+
+            // 真实 dom 改变完成
+            updated() {
+                console.log('--------------updated-------------');
+                console.log('el', this.$el); //<div id="app">hello world new</div>
+                console.log('data', this.$data); // hello world new
+                console.log('innerHTML', document.getElementById('app').innerHTML); // hello word new
+            },
+
+            // 销毁之前调用，什么都没变，都可以正常使用
+            beforeDestroy() {
+                console.log('--------------beforeDestroy-------------');
+                console.log('el', this.$el); //<div id="app">hello world new</div>
+                console.log('data', this.$data); // hello world new
+                console.log('innerHTML', document.getElementById('app').innerHTML); // hello world new
+            },
+
+            // 销毁之后调用，vue实例中的所有东西都会解绑定，所有时间监听器会被移除，所有的子实例也会被销毁
+            destroyed() {
+                console.log('--------------destroyed-------------');
+                console.log('el', this.$el); //<div id="app">hello world new</div>
+                console.log('data', this.$data); // hello world new
+                console.log('innerHTML', document.getElementById('app').innerHTML); // hello world new
+            }
+
+        })
+    </script>
+</body>
+
+</html>
