@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <my-com title="全局组件" :msg="msg"></my-con>
+            <tpl1 title="hh" :msg="msg"></tpl1>>
+    </div>
+
+    <div id="app1">
+        <tpl1 title="局部组件" :msg="msg"></tpl1>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        // 全局组件
+        Vue.component('myCom', {
+            template: '<div> {{title}} {{msg}}</div>',
+            props: ['title', 'msg']
+        })
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world'
+            }
+        })
+        // 局部组件
+        let vm2 = new Vue({
+            el: '#app1',
+            data: {
+                msg: '372198',
+            },
+            components: {
+                'tpl1':{
+                    template:'<div> {{title}} {{msg}}</div>',
+                    props:['title','msg'],
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- <my-com :title="msg" :fn1="add1"></my-com>   方案1-->
+        <my-com :msg="title" @add666="add1"></my-com>
+
+        {{count}}
+    </div>
+    <!-- 组件 -->
+    <template id="tpl">
+        <div>
+            <h3>标题：{{msg}}</h3>
+            <button @click="add">加加</button>
+        </div>
+    </template>
+
+    <script src="./vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                title: 'hello world',
+                count: 0
+            },
+            methods: {
+                add1() {
+                    this.count++;
+                },
+            },
+            components: {
+                'myCom': {
+                    template: '#tpl',
+                    data() {
+                        return {}
+                    },
+                    // props:['msg','fn1'] 方案1
+                    props: ['msg'], // 方案2
+                    methods: {
+                        add() {
+                            // 不要使用这种方式
+                            // vm.count++;
+
+                            // 方案1
+                            //this.fn1();
+
+                            // 方案2
+                            this.$emit('add666');
+                        }
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

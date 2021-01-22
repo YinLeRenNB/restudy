@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <div id="app">
+        <my-com :msg='msg'>
+            <h3 slot="slot1">直接写是不show的</h3>
+            <h5 slot="slot2">想在最下面显示</h5>
+        </my-com>
+
+    </div>
+
+    <!-- template标签中的内容在页面中不会显示 -->
+    <template id="my-com">
+        <div>
+            <!-- 有slot <h3>才会显示 -->
+            <slot name="slot1"></slot> 
+
+            <h1>组件</h1>
+            <p>{{title}}</p>
+            <p>{{msg}}</p>
+            <button @click="add">加1</button>
+            <p>{{count}}</p>
+            <slot name="slot2"></slot>
+        </div>
+    </template>
+
+    <script src="./vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello world'
+            },
+            components: {
+                'myCom': {
+                    template: '#my-com',
+                    props:['msg'],
+                    // 组件是复用的，为了避免组件之间的data互相干扰，采用函数返回值的方式定义
+                    data() {
+                        return {
+                            title: '今天学组件',
+                            count: 0
+                        }
+                    },
+                    methods: {
+                        add() {
+                            this.count++;
+                        }
+                    }
+                },
+            },
+
+        })
+    </script>
+</body>
+
+</html>
