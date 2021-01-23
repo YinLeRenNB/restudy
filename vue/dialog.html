@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialog</title>
+</head>
+<style>
+    * {
+        list-style: none;
+    }
+    .wrapper{
+        padding: 0 10px;
+    }
+    .dia-box {
+        width: 400px;
+        background: rgba(167, 165, 165, 0.3);
+        border-radius: 5px;
+        border: 1px solid #000;
+        position: absolute;
+        /* 相对于父元素的 -> 以元素的左上角为基准 */
+        top: 50%;
+        left: 50%;
+        /* 相对于自己的 */
+        transform: translate(-50%,-50%);
+
+    }
+    .dia-box header,.dia-box footer{
+        height: 40px;
+        line-height: 40px;
+    }
+    .dia-box main{
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    .dia-box main label{
+        display: inline-block;
+        width: 80px;
+    }
+    .dia-box header span{
+        float: right;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+
+
+    <div id="app">
+        <button @click="showLogin">登录</button>
+        <button @click="showRegist">注册</button>
+        <my-dialog v-show="isLoginShow" title="登录" @closetemp="hide">
+            <p>
+                <!-- label 和 input 连用 id+for -> 点击用户名也会进行聚焦 -->
+                <label for="login-user">用户名：</label>
+                <input id="login-user" type="text">
+            </p>
+            <p>
+                <label for="login-pwd">密码：</label>
+                <input id="login-pwd" type="text">
+            </p>
+       
+        </my-dialog>
+
+        <my-dialog v-show="isRegistShow" title="注册" @closetemp="hide">
+            <p>
+                <!-- label 和 input 连用 id+for -> 点击用户名也会进行聚焦 -->
+                <label for="regist-user">用户名：</label>
+                <input id="regist-user" type="text">
+            </p>
+            <p>
+                <label for="regist-pwd">密码：</label>
+                <input id="regist-pwd" type="text">
+            </p><p>
+                <label for="regist-repwd">确认密码：</label>
+                <input id="regist-repwd" type="text">
+            </p>
+       
+        </my-dialog>
+
+    </div>
+    <!-- 组件 -->
+    <template id="tpl">
+       
+        <div class="dia-box">
+            <header class="wrapper">
+                {{title}}
+                <span @click="close">X</span>
+            </header>
+
+            <main class="wrapper">
+                <slot></slot>
+            </main>
+            <footer class="wrapper" @click="close">
+                <button>{{title}}</button>
+            </footer>
+
+
+        </div>
+
+    </template>
+
+    <script src="./vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                isLoginShow:false,
+                isRegistShow:false
+            },
+            methods:{
+                showLogin(){
+                    this.isLoginShow = true;
+                    this.isRegistShow = false;
+                },
+                showRegist(){
+                    this.isRegistShow = true;
+                    this.isLoginShow = false;
+                },
+                hide(){
+                    this.isRegistShow = false;
+                    this.isLoginShow = false;
+                }
+            },
+            components: {
+                'myDialog': {
+                    template: '#tpl',
+                    props:['title'],
+                    methods:{
+                        close(){
+                            this.$emit('closetemp')
+                        }
+                    }
+                }
+
+            },
+
+        })
+    </script>
+</body>
+
+</html>
