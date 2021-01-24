@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1>about</h1>
+        <h3>后端</h3>
     </div>
 </template>
 
 <script>
     export default {
-        name:'about',
+        name:'Rd',
     }
 </script>
 
