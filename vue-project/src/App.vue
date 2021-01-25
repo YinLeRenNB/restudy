@@ -13,7 +13,8 @@
       <router-link :to="{name:'User',params:{name:'wzx',id:'A01170341'}}">User</router-link> |
       <!-- 第三种传参 -->
       <router-link to="/detail/100/19999">Course-Detail</router-link> |
-      <router-link to="/newyear">Activity-Page</router-link> 
+      <router-link to="/newyear">Activity-Page</router-link> |
+      <router-link to="/count">Count</router-link>
 
 
 

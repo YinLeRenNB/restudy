@@ -53,6 +53,12 @@ const routes = [
       next();
     }
   },
+  {
+    path:'/count',
+    name:'Count',
+    component:()=>import('../views/Count.vue'),
+
+  },
   // 必须放在最下面
   {
     path: '*',
