@@ -3,7 +3,7 @@
     <div class="title">
       <h2>{{ this.movieObj.title }}</h2>
     </div>
-    <div id="img-box">
+    <div class="img-box">
       <img :src="'https://images.weserv.nl/?url=' + this.movieObj.img" alt="" />
     </div>
     <div class="info">
@@ -51,15 +51,12 @@ export default {
     text-align: center;
   }
 }
-#img-box {
-    position: relative;
-    height: 300px;
-    width: 100%;
+.img-box {
+    text-align: center;
   img {
     width: 200px;
     height: 300px;
-    position: absolute;
-    left: 25%;
+    
   }
 }
 </style>
