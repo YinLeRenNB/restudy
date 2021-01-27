@@ -32,7 +32,9 @@ header {
   text-align: center;
   background: grey;
   color: white;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   span {
     position: absolute;
     left: 0;

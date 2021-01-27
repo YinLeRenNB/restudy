@@ -51,16 +51,16 @@
 </script>
 
 <style lang="scss" scoped>
-    footer{
-        height:1rem;
-        line-height:1rem;
-        text-align: center;
-        background: grey;
-        color: #fff;
-        display: flex;
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        justify-content: space-around;
-    }
+footer {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  background: grey;
+}
+  
 </style>

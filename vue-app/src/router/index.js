@@ -11,18 +11,19 @@ const routes = [
   },
   {
     path: '/',
-    name: '电影',
     component: () => import('../views/Movie.vue'),
   },
   {
     path: '/chat',
-    name: '聊天',
     component: () => import('../views/Chat.vue'),
   },
   {
     path: '/music',
-    name: '音乐',
     component: () => import('../views/Music.vue'),
+  },
+  {
+    path: '/movieDeatil/:id',
+    component: () => import('../views/movieDetail.vue'),
   },
 ]
 
