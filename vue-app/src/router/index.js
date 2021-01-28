@@ -6,7 +6,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'/book',
-    name:'书籍',
     component:()=>import('../views/Book.vue')
   },
   {
