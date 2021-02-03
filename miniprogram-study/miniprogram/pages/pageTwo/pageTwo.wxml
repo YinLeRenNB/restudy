@@ -1,0 +1,10 @@
+<!-- catchtap -> 阻止事件冒泡 -->
+<button bindtap="add" data-step="{{3}}" type="primary">add</button>
+<view>{{num}}</view>
+<view class="box1" bindtap="tap1">
+  <view class="box2" bindtap="tap2">
+    <view class="box3" catchtap="tap3">
+
+    </view>
+  </view>
+</view>

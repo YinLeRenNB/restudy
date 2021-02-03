@@ -1,0 +1,7 @@
+<view class="aa">页面3</view>
+{{count}}
+
+<mCom wx:if="{{isShow}}" bind:myEvent="addfn">
+  <view slot="slot1">😄</view>
+  <view slot="slot2">😭</view>
+</mCom>

@@ -1,0 +1,9 @@
+<view class="add-box wrapper">
+  <input bindinput="getVal" type="text" placeholder="请输入..." />
+  <button bindtap="addTodo" type="primary" size="mini">添加</button>
+</view>
+<view class="todoList wrapper">
+  <view>序号</view>
+  <view>代办事项</view>
+  <view>操作</view>
+</view>

@@ -1,0 +1,52 @@
+<!-- 变量的引入 -->
+{{str}}
+
+<!-- for循环 -->
+<view wx:for="{{arr}}" wx:key="index">
+  {{item}} --- {{index}}
+</view>
+
+<!-- for循环:起别名 -->
+<view wx:for="{{arr}}" wx:for-item="value" wx:for-index="id" wx:key="index">
+  {{value}} --- {{id}}
+</view>
+
+<!-- if ... else -->
+<view wx:if="{{num > 0}}">num 大于 0</view>
+<view wx:elif="{{num == 0}}">num 等于 0</view>
+<view wx:else>num 小于 0;</view>
+
+<!-- 循环对象 -->
+<view wx:for="{{objArr}}" wx:key="index">
+  <view>姓名：{{item.name}}</view>
+  <view>年龄：{{item.age}}</view>
+</view>
+
+<!-- block 类似 template 不作为DOM结构存在于循环的结果中 -->
+<block wx:for="{{objArr}}" wx:key="index">
+  <view>姓名：{{item.name}}</view>
+  <view>年龄：{{item.age}}</view>
+</block>
+
+<!-- template 作为复用(写死) -->
+<template name="temp1">
+  <view>姓名：name</view>
+  <view>年龄：age</view>
+</template>
+<template is="temp1"></template>
+
+<!-- template 作为复用(传参) -->
+<template name="temp2">
+  <view>姓名：{{name}}</view>
+  <view>年龄：{{age}}</view>
+</template>
+<template is="temp2" data="{{name:'zhaoyi',age:21}}"></template>
+
+<!-- template 复杂时将其抽出作为单独文件 防止代码过长 -->
+<import src="./temp.wxml"></import>
+  <view wx:for="{{objArr}}" wx:key="index">
+    <template is="temp3" data="{{...item}}"></template>
+  </view>
+
+<!-- button -->
+<button bindtap="goTwo" type="primary">goTwo</button>
