@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     getData(){
-      this.axios.get('https://bird.ioliu.cn/netease/playlist?id=5372447882').then((res)=>{
+      this.axios.get('https://bird.ioliu.cn/netease/playlist?id=307343394').then((res)=>{
         this.playList = res.data.playlist.tracks;
         this.audio = this.playList.map((item,index) => {
           // map 返回新数组

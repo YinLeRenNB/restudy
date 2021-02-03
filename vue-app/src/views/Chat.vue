@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>聊天</h1>
+    <h1>这将是一个聊天页面</h1>
   </div>
 </template>
 
@@ -11,4 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1{
+  text-align: center;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="book-page">
     <div class="carousel">
       <el-carousel :interval="4000" type="card" height="200px">
         <el-carousel-item v-for="item in imgList" :key="item">
@@ -77,6 +77,7 @@ export default {
 .el-carousel__item {
   img {
     width: 100%;
+    height: 100%;
   }
 }
 .book-box {

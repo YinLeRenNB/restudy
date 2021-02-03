@@ -27,6 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
+  z-index: 100;
   height: 1rem;
   line-height: 1rem;
   text-align: center;
